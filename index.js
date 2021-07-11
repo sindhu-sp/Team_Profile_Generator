@@ -66,18 +66,22 @@ inquirer
         },
         
     ])
+    // .then(answers => {
+    //     fs.writeFileSync(generatedHtmlFilePath, "");
+    // })
+    // .catch(error => {
+    //     if(error.isTtyError){
+
+    //     }
+    //     else {
+
+    //     }
+    // });
+
     .then(answers => {
-        fs.writeFileSync(generatedHtmlFilePath, "");
+        let manager = new Intern(answers.mName, answers.mId, answers.mEmail, answers.mOfficeNumber);
+        teamMembers.push(manager);
     })
-    .catch(error => {
-        if(error.isTtyError){
-
-        }
-        else {
-
-        }
-    });
-
     function addIntern() {
         inquirer
     .prompt([
