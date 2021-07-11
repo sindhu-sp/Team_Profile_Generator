@@ -1,25 +1,21 @@
-const Manager = require("./libs/Manager");
-const Engineer = require("./libs/Engineer");
-const Intern = require("./libs/Intern");
 
 const inquirer = require("inquirer");
 const fs = require("fs");
 
 const generatedHtmlFilePath = "./dist/Team.html";
 
- let teamMembers = [];
-// function addTeamMemberToArray(member)
-// {
-//     if(member === "Manager") {
+const Manager = require("./libs/Manager");
+const Engineer = require("./libs/Engineer");
+const Intern = require("./libs/Intern");
 
-//     }
-// }
+ let teamMembers = [];
+
 
 // Project requirements
 
-// GIVEN a command-line application that accepts user input
+// GIVEN a command-line application that accepts user text
 // WHEN I am prompted for my team members and their information
-// THEN an HTML file is generated that displays a nicely formatted team roster based on user input
+// THEN an HTML file is generated that displays a nicely formatted team roster based on user text
 // WHEN I click on an email address in the HTML
 // THEN my default email program opens and populates the TO field of the email with the address
 // WHEN I click on the GitHub username
@@ -40,29 +36,29 @@ inquirer
     .prompt([
         {
             name: "mName",
-            type = "input",
-            message = "Enter the Manager's name"
+            type: "text",
+            message: "Enter the Manager's name"
         },
         {
             name: "mId",
-            type = "input",
-            message = "Enter the Manager's ID"
+            type: "text",
+            message: "Enter the Manager's ID"
         },
         {
             name: "mEmail",
-            type = "input",
-            message = "Enter the Manager's Email"
+            type: "text",
+            message: "Enter the Manager's Email"
         },
         {
             name: "mOfficeNumber",
-            type = "input",
-            message = "Enter the Manager's office number"
+            type: "text",
+            message: "Enter the Manager's office number"
         },
         {
             name: "addTeamMembers",
-            type = "list",
-            message = "Choose from the below options to add team members",
-            choices = ["Engineer", "Intern", "Exit"]
+            type: "list",
+            message: "Choose from the below options to add team members",
+            choices: ["Engineer", "Intern", "Exit"]
         },
         
     ])
@@ -79,63 +75,125 @@ inquirer
     // });
 
     .then(answers => {
-        let manager = new Intern(answers.mName, answers.mId, answers.mEmail, answers.mOfficeNumber);
+        let manager = new Manager(answers.mName, answers.mId, answers.mEmail, answers.mOfficeNumber);
         teamMembers.push(manager);
+        evaluateAddTeamMember(answers.addTeamMembers)
     })
+    .catch(error => {
+        if(error.isTtyError){
+            console.log("Could not be rendered in the current environment");
+        }
+        else {
+            console.log("Something went wrong")
+        }
+    });
+
+    function addEngineer() {
+        inquirer
+    .prompt([
+        {
+            name: "eName",
+            type: "text",
+            message: "Enter the Engineer's name"
+        },
+        {
+            name: "eId",
+            type: "text",
+            message: "Enter the Engineer's ID"
+        },
+        {
+            name: "eEmail",
+            type: "text",
+            message: "Enter the Engineer's Email"
+        },
+        {
+            name: "eGithub",
+            type:"text",
+            message:"Enter the Engineer's GitHub Username"
+        },
+        {
+            name: "addTeamMembers",
+            type:"list",
+            message:"Choose from the below options to add team members",
+            choices: ["Engineer", "Intern", "Exit"]
+        },
+        
+    ])
+    .then(answers => {
+        let engineer = new Engineer(answers.eName, answers.eId, answers.eEmail, answers.eGithub);
+        teamMembers.push(Engineer);
+        evaluateAddTeamMember(answers.addTeamMembers)
+        
+    })
+    .catch(error => {
+        if(error.isTtyError){
+            console.log("Could not be rendered in the current environment");
+        }
+        else {
+            console.log("Something went wrong")
+        }
+    });
+
+    }
+
     function addIntern() {
         inquirer
     .prompt([
         {
             name: "iName",
-            type = "input",
-            message = "Enter the Intern's name"
+            type: "text",
+            message: "Enter the Intern's name"
         },
         {
             name: "iId",
-            type = "input",
-            message = "Enter the Intern's ID"
+            type: "text",
+            message: "Enter the Intern's ID"
         },
         {
             name: "iEmail",
-            type = "input",
-            message = "Enter the Intern's Email"
+            type: "text",
+            message: "Enter the Intern's Email"
         },
         {
             name: "iSchool",
-            type = "input",
-            message = "Enter the Intern's school"
+            type:"text",
+            message:"Enter the Intern's school"
         },
         {
             name: "addTeamMembers",
-            type = "list",
-            message = "Choose from the below options to add team members",
-            choices = ["Engineer", "Intern", "Exit"]
+            type:"list",
+            message:"Choose from the below options to add team members",
+            choices: ["Engineer", "Intern", "Exit"]
         },
         
     ])
     .then(answers => {
         let intern = new Intern(answers.iName, answers.iId, answers.iEmail, answers.iSchool);
         teamMembers.push(intern);
+        evaluateAddTeamMember(answers.addTeamMembers)
+        
+    })
+    .catch(error => {
+        if(error.isTtyError){
+            prompt("Could not be rendered in the current environment");
+        }
+        else {
+            prompt("Something went wrong")
+        }
+    });
 
-        if(answers.addTeamMembers === "Engineer"){
+    }
+
+    function evaluateAddTeamMember(result) {
+        if(result === "Engineer"){
             addEngineer();
         }
-        else if(answers.addTeamMembers === "Intern"){
+        else if(result === "Intern"){
             addIntern();
         }
         else {
             generatedHtml();
         }
-    })
-    .catch(error => {
-        if(error.isTtyError){
-
-        }
-        else {
-
-        }
-    });
-
     }
 
     function generateHtml() {
