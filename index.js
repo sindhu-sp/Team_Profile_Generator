@@ -2,7 +2,7 @@
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-const generatedHtmlFilePath = "./dist/Team.html";
+const generatedHtmlFilePath = "./dist/team.html";
 
 const Manager = require("./libs/Manager");
 const Engineer = require("./libs/Engineer");
@@ -58,7 +58,7 @@ inquirer
             name: "addTeamMembers",
             type: "list",
             message: "Choose from the below options to add team members",
-            choices: ["Engineer", "Intern", "Exit"]
+            choices: ["Engineer", "Intern"]
         },
         
     ])
@@ -191,11 +191,50 @@ inquirer
         else if(result === "Intern"){
             addIntern();
         }
-        else {
-            generatedHtml();
+        else if(result === "Exit") {
+            generateHtml();
         }
     }
 
+    function generateInitialHtml() {
+        return `<!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Team Profile Generator</title>
+            
+        </head>
+        <body>
+            <div class="navbar">
+            <h1 class="nTitile">TEAM PROFILE</h1>
+            </div>
+            <div class="card-body">`
+    }
+
+    function generateTeamMembersHtml(teamMembers) {
+        return `<div class="card">
+        <div class="teamMemberTitle">
+        <h3>${teamMembers.getName()} - ${teamMembers.getRole()}</h3>
+        </div>
+        <div class="teamMemberCard-body">
+        <ul>
+        <li>ID:${teamMembers.getId()}</li>
+        <li>Email: <a href="mail:${teamMembers.getEmail()}">${teamMembers.getEmail()}</a></li>
+        ${teamMembers.getRoleHtml()}
+        </ul>
+        </div>
+        </div>`;
+    }
+
+
     function generateHtml() {
-        fs.writeFileSync(generatedHtmlFilePath, "")
+        fs.writeFileSync(generatedHtmlFilePath, "");
+        let htmlData = generateInitialHtml();
+        for(var i in teamMembers) {
+            htmlData += generateTeamMembersHtml(teamMembers[i]);
+        }
+        htmlData += generateFinalHtml();
+        fs.writeFileSync(generatedHtmlFilePath, htmlData);
     }
