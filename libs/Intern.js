@@ -13,5 +13,8 @@ class Intern extends Employee {
     getRole() {
         return "Intern";
     }
+    getRoleAttribute(){
+        return `<li>School: ${this.getSchool()}</li>`
+    }
 }
 module.exports = Intern;

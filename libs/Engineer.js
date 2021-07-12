@@ -13,6 +13,8 @@ class Engineer extends Employee {
     getRole() {
         return "Engineer";
     }
-    
+    getRoleAttribute(){
+        return `<li>Github Link: <a href="https://github.com/${this.getGithub()}">${this.getGithub()}</a></li>`
+    }
 }
 module.exports = Engineer;
