@@ -34,12 +34,6 @@ inquirer
             type: "input",
             message: "Enter the Manager's office number"
         },
-        // {
-        //     name: "addTeamMembers",
-        //     type: "list",
-        //     message: "Choose from the below options to add team members",
-        //     choices: ["Engineer", "Intern", "Exit"]
-        // }
         
     ])
    
@@ -47,7 +41,7 @@ inquirer
         let manager = new Manager(answers.mName, answers.mId, answers.mEmail, answers.mOfficeNumber);
         teamMembers.push(manager);
         addTeamMembers();
-        console.log(manager);
+        // console.log(manager);
 
         evaluateAddTeamMember(answers.addTeamMembers)
     })
@@ -101,12 +95,6 @@ addManager();
             type:"input",
             message:"Enter the Engineer's GitHub Username"
         },
-        // {
-        //     name: "addTeamMembers",
-        //     type:"list",
-        //     message:"Choose from the below options to add team members",
-        //     choices: ["Engineer", "Intern", "Exit"]
-        // }
         
     ])
     .then(answers => {
@@ -150,12 +138,6 @@ addManager();
             type:"input",
             message:"Enter the Intern's school"
         },
-        // {
-        //     name: "addTeamMembers",
-        //     type:"list",
-        //     message:"Choose from the below options to add team members",
-        //     choices: ["Engineer", "Intern", "Exit"]
-        // }
         
     ])
     .then(answers => {
@@ -163,7 +145,7 @@ addManager();
         teamMembers.push(intern);
         addTeamMembers();
 
-        console.log(intern);
+        // console.log(intern);
 
         evaluateAddTeamMember(answers.addTeamMembers)
         
@@ -190,7 +172,7 @@ addManager();
             generateHtml();
         }
 
-        console.log(result);
+        // console.log(result);
     }
 
     function generateInitialHtml() {
@@ -201,7 +183,7 @@ addManager();
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>Team Profile Generator</title>
-            <link rel="stylesheet" href="./src/team.css">
+            <link rel="stylesheet" href="./team.css" />
 
         </head>
         <body>
@@ -219,7 +201,7 @@ addManager();
         <div class="teamMemberCard-body">
         <ul>
         <li>ID:${teamMembers.getId()}</li>
-        <li>Email: <a href="mail:${teamMembers.getEmail()}">${teamMembers.getEmail()}</a></li>
+        <li>Email: <a href="mailto:${teamMembers.getEmail()}">${teamMembers.getEmail()}</a></li>
         ${teamMembers.getRoleAttribute()}
         </ul>
         </div>
