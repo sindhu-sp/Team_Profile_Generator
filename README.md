@@ -91,10 +91,15 @@ school
 
 <img src="Assets/TeamProfile.png" alt="refresh page" height = 300 width= 500 />
 
+<<<<<<< HEAD
 ## The recording of the working program
 
 <img src="Assets/Team_Profile.gif" alt="refresh page" height = 300 width= 500 />
 
+=======
+## Github Repository URL
+https://github.com/sindhu-sp/Team_Profile_Generator
+>>>>>>> 3690a4b079fc2e7f474cfeda73ffdd27fe8bb7dd
 
 ## Technologies Used:
 - HTML
