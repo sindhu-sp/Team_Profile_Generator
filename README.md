@@ -88,10 +88,13 @@ school
 
 
 ## Team Profile Generator Demo
+
 <img src="Assets/TeamProfile.png" alt="refresh page" height = 300 width= 500 />
 
-## Deployed Site
-<https://sindhu-sp.github.io/Weather-Dashboard/>
+## The recording of the working program
+
+<img src="Assets/Team_Profile.gif" alt="refresh page" height = 300 width= 500 />
+
 
 ## Technologies Used:
 - HTML
